@@ -6,6 +6,7 @@ import com.newsPortal.newsPortal.model.command.base.ApiBasePageCommand;
 import com.newsPortal.newsPortal.model.command.news.FilterNewsCommand;
 import com.newsPortal.newsPortal.model.command.news.SaveNewsCommand;
 import com.newsPortal.newsPortal.model.dto.NewsDTO;
+import com.newsPortal.newsPortal.model.dto.WorldNewsResultDTO;
 import com.newsPortal.newsPortal.model.dto.base.base.ApiBaseDTO;
 import com.newsPortal.newsPortal.model.dto.base.base.ApiBasePageDTO;
 import com.newsPortal.newsPortal.model.dto.base.base.ErrorInfo;
@@ -13,6 +14,8 @@ import com.newsPortal.newsPortal.model.dto.base.base.PageDTO;
 import com.newsPortal.newsPortal.model.entity.News;
 import com.newsPortal.newsPortal.model.specification.NewsSpecification;
 import com.newsPortal.newsPortal.repository.NewsRepository;
+import com.newsPortal.newsPortal.service.ExchangeCurrency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,9 @@ import java.util.stream.Collectors;
 public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
+
+    @Autowired
+    private ExchangeCurrency simpleProxy;
 
     public NewsServiceImpl(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
@@ -82,6 +88,13 @@ public class NewsServiceImpl implements NewsService {
         List<News> news = newsRepository.getRecentByCategories();
 
         return NewsDTO.fromList(news);
+    }
+
+    @Override
+    public List<NewsDTO> getWorldNews() {
+        WorldNewsResultDTO worldNewsResultDTO;
+        worldNewsResultDTO = simpleProxy.getWorldNews();
+        return  NewsDTO.fromWorldNewsList(worldNewsResultDTO.getResults());
     }
 
     //TODO send map instead of list to frontend, change to map in frontend also. Test if map works better then list if not, go with the list.

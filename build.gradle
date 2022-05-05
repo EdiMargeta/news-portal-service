@@ -57,6 +57,6 @@ test {
 
 flyway {
     url = 'jdbc:postgresql://localhost:5432/news-portal'
-    user = 'edi'
-    password = 'edi'
+    user = 'tvzadmin'
+    password = 'tvz'
 }

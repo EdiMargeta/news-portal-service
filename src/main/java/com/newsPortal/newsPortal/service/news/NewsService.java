@@ -23,6 +23,8 @@ public interface NewsService {
 
     ApiBaseDTO<NewsDTO> get (Long id);
 
-    List<NewsDTO> getRecentNews ();
+    List<NewsDTO> getRecentNews();
+
+    List<NewsDTO> getWorldNews();
 
 }

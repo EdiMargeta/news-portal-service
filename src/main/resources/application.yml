@@ -2,6 +2,8 @@
 #  secret: oiasjfoiasj8asd23124!####9u203i49jioh!$$
 #  expirationInMinutes: 1500
 #  issuer: tvz
+server:
+  port: 9100
 
 spring:
   application:
@@ -13,10 +15,8 @@ spring:
   # Database
   datasource:
     url: jdbc:postgresql://localhost:5432/news-portal
-    username: edi
-    password: 'edi'
-server:
-  port: 9100
+    username: tvzadmin
+    password: 'tvz'
 
 eureka:
   client:

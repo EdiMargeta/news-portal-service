@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/news")
+@CrossOrigin
 public class NewsController {
     private final NewsService newsService;
 
@@ -30,13 +30,6 @@ public class NewsController {
         return "Hello JavaInUse Called in First Service";
     }
 
-    @Autowired
-    private ExchangeCurrency simpleProxy;
-
-    @GetMapping("/feign")
-    public String getCurrencyUsingFeign() {
-        return simpleProxy.getCurrency();
-    }
 
     @ApiOperation("Save News")
     @RequestMapping("/save")
@@ -66,6 +59,12 @@ public class NewsController {
     @GetMapping("/filter-all-recent")
     public List<NewsDTO> getRecentNews(){
         return newsService.getRecentNews();
+    }
+
+    @ApiOperation("Get World news")
+    @GetMapping("/world-news")
+    public List<NewsDTO> getWorldNews(){
+        return newsService.getWorldNews();
     }
 
 }

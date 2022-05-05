@@ -2,6 +2,7 @@ package com.newsPortal.newsPortal.model.dto;
 
 import com.newsPortal.newsPortal.model.entity.News;
 import lombok.Data;
+import org.aspectj.weaver.World;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +31,19 @@ public class NewsDTO {
         dto.setCoverImage(news.getCoverImage());
 
         return dto;
+    }
+
+    public static NewsDTO fromWorldNews(WorldNewsDTO news) {
+        NewsDTO dto = new NewsDTO();
+        dto.setHeadline(news.getTitle());
+        dto.setDescription(news.getDescription());
+        dto.setCoverImage(news.getImage_url());
+
+        return dto;
+    }
+
+    public static List<NewsDTO> fromWorldNewsList(List<WorldNewsDTO> news) {
+        return news.stream().map(NewsDTO::fromWorldNews).collect(Collectors.toList());
     }
 
     public static List<NewsDTO> fromList(List<News> news) {
