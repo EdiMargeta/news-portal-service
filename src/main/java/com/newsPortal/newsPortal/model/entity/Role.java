@@ -13,7 +13,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
 
     @OneToMany(mappedBy = "role")
     private List<User> users;

@@ -1,4 +1,4 @@
-CREATE TABLE public.role (
+securityCREATE TABLE public.role (
     id          BIGSERIAL,
     name        VARCHAR (50),
     PRIMARY KEY (id)
